@@ -33,7 +33,7 @@ class ImageClassificationViewController: UIViewController {
     @IBOutlet weak var in5: UIImageView!
     @IBOutlet weak var in6: UIImageView!
     @IBOutlet weak var in7: UIImageView!
-    @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var sceneView: VirtualObjectARView!
     
     let captureSession = AVCaptureSession()
     var previewLayer: CALayer!
@@ -44,10 +44,18 @@ class ImageClassificationViewController: UIViewController {
     let bubbleDepth : Float = 0.01
     let confidenceLevel: Float = 0.2
     var classificationsx = [VNClassificationObservation]()
-    let myQueue = DispatchQueue(label: "myQueue", qos: .userInitiated)
+    let updateQueue = DispatchQueue(label: "myQueue")
     var center = CGPoint()
     
     var pointerNode = SCNNode()
+    var focusSquare = FocusSquare()
+    var session: ARSession {
+        return sceneView.session
+    }
+    var screenCenter: CGPoint {
+        let bounds = sceneView.bounds
+        return CGPoint(x: bounds.midX, y: bounds.midY)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,22 +138,20 @@ class ImageClassificationViewController: UIViewController {
 
 extension ImageClassificationViewController: ARSCNViewDelegate {
     
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        
-    }
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
         if shouldPerformClassification {
             shouldPerformClassification = false
             let imageFromArkitScene:UIImage = sceneView.snapshot()
             updateClassifications(for: imageFromArkitScene)
         }
-        resetPointerNode()
-    }
-    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
         
+        DispatchQueue.main.async {
+            self.updateFocusSquare(isObjectVisible: true)
+        }
     }
 }
+
 ////////////////////////
 //Custom Functions
 ////////////////////
@@ -186,7 +192,7 @@ extension ImageClassificationViewController {
     
     func setupAR() {
         
-        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+//        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         self.sceneView.autoenablesDefaultLighting = true
         if #available(iOS 11.3, *) {
             configuration.planeDetection = [.horizontal,.vertical]
@@ -195,25 +201,23 @@ extension ImageClassificationViewController {
         }
         self.sceneView.session.run(configuration)
         
-        pointerNode = SCNNode(geometry: SCNSphere(radius: 0.005))
-        pointerNode.geometry?.firstMaterial?.diffuse.contents = UIColor.white
-        pointerNode.geometry?.firstMaterial?.specular.contents = UIColor.black
+        pointerNode = SCNNode(geometry: SCNSphere(radius: 0.006))
+        pointerNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        pointerNode.geometry?.firstMaterial?.specular.contents = UIColor.white
         sceneView.scene.rootNode.addChildNode(pointerNode)
     }
     
-    func resetPointerNode() {
-        DispatchQueue.main.async {
-            if let hitTestResult = self.sceneView.hitTest(self.center, types: [.featurePoint, .existingPlane]).first {
-                
-                let transform = hitTestResult.worldTransform
-                let thirdColumn = transform.columns.3
-//                DispatchQueue.main.async {
-                    self.pointerNode.position = SCNVector3Make(thirdColumn.x, thirdColumn.y, thirdColumn.z)
-//                }
-            }
-        }
-    }
-    
+//    func resetPointerNode() {
+//        DispatchQueue.main.async {
+//            let center = self.screenCenter
+//            if let hitTestResult = self.sceneView.hitTest(center, types: [.existingPlane]).first {
+//
+//                let transform = hitTestResult.worldTransform
+//                let thirdColumn = transform.columns.3
+//                    self.pointerNode.position = SCNVector3Make(thirdColumn.x, thirdColumn.y, thirdColumn.z)
+//            }
+//        }
+//    }
 //    func removePointerNode() {
 ////        myQueue.async {
 //            self.pointerNode.enumerateChildNodes { (node, _) in
@@ -245,6 +249,27 @@ extension ImageClassificationViewController {
         self.lbl4.text = String(format: "  (%.2f) %@", classifications[3].confidence,  classifications[3].identifier)
     }
     
+    func updateFocusSquare(isObjectVisible: Bool) {
+        
+        focusSquare.unhide()
+        // Perform hit testing only when ARKit tracking is in a good state.
+        if let camera = session.currentFrame?.camera, case .normal = camera.trackingState,
+            let result = self.sceneView.smartHitTest(screenCenter) {
+                DispatchQueue.main.async {
+                    self.sceneView.scene.rootNode.addChildNode(self.focusSquare)
+                    self.focusSquare.state = .detecting(hitTestResult: result, camera: camera)
+                    let transform = result.worldTransform
+                    let thirdColumn = transform.columns.3
+                    self.pointerNode.position = SCNVector3Make(thirdColumn.x, thirdColumn.y, thirdColumn.z)
+                }
+        } else {
+            updateQueue.async {
+                self.focusSquare.state = .initializing
+                self.sceneView.pointOfView?.addChildNode(self.focusSquare)
+            }
+        }
+    }
+    
     func createNewBubbleParentNode(_ text : String, img: UIImage) -> SCNNode {
 
         let billboardConstraint = SCNBillboardConstraint()
@@ -256,7 +281,7 @@ extension ImageClassificationViewController {
         font = font?.withTraits(traits: .traitBold)
         bubble.font = font
         bubble.alignmentMode = kCAAlignmentCenter
-        bubble.firstMaterial?.diffuse.contents = UIColor.blue
+        bubble.firstMaterial?.diffuse.contents = UIColor.red
         bubble.firstMaterial?.specular.contents = UIColor.white
         bubble.firstMaterial?.isDoubleSided = true
         // bubble.flatness // setting this too low can cause crashes.

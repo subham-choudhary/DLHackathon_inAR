@@ -14,7 +14,13 @@
 		11063F741EC0F5270033EE6D /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11063F731EC0F5270033EE6D /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
 		113695D81EC1151400CA6C43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113695D61EC1151400CA6C43 /* LaunchScreen.storyboard */; };
 		B982282721B4C54B004F5CF5 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B982282621B4C54B004F5CF5 /* Inceptionv3.mlmodel */; };
-		B982282921B543F0004F5CF5 /* ImageClassifier2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B982282821B543F0004F5CF5 /* ImageClassifier2.mlmodel */; };
+		B98CA59C21CB8A7700D7F082 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CA59A21CB8A7700D7F082 /* FocusSquare.swift */; };
+		B98CA59D21CB8A7700D7F082 /* FocusSquareSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CA59B21CB8A7700D7F082 /* FocusSquareSegment.swift */; };
+		B98CA5A021CB8D5000D7F082 /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CA59E21CB8D5000D7F082 /* VirtualObject.swift */; };
+		B98CA5A121CB8D5000D7F082 /* VirtualObjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CA59F21CB8D5000D7F082 /* VirtualObjectLoader.swift */; };
+		B98CA5A321CB8E1000D7F082 /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CA5A221CB8E1000D7F082 /* VirtualObjectARView.swift */; };
+		B98CA5A521CB8F3E00D7F082 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98CA5A421CB8F3E00D7F082 /* Utilities.swift */; };
+		B98CA5A921CB9EE900D7F082 /* ImageClassifier2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B98CA5A821CB9EE900D7F082 /* ImageClassifier2.mlmodel */; };
 		B9E1F1C821B42698009226B7 /* ImageClassifier1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B9E1F1C721B42698009226B7 /* ImageClassifier1.mlmodel */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +36,13 @@
 		A9558E70A9563BA000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		A9666960A9666AD000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		B982282621B4C54B004F5CF5 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
-		B982282821B543F0004F5CF5 /* ImageClassifier2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = ImageClassifier2.mlmodel; path = ../../../../../var/folders/_n/mbhly0ws4wj08sj5r_fg564n_pjf2g/T/ImageClassifier2.mlmodel; sourceTree = "<group>"; };
+		B98CA59A21CB8A7700D7F082 /* FocusSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
+		B98CA59B21CB8A7700D7F082 /* FocusSquareSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusSquareSegment.swift; sourceTree = "<group>"; };
+		B98CA59E21CB8D5000D7F082 /* VirtualObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
+		B98CA59F21CB8D5000D7F082 /* VirtualObjectLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualObjectLoader.swift; sourceTree = "<group>"; };
+		B98CA5A221CB8E1000D7F082 /* VirtualObjectARView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualObjectARView.swift; sourceTree = "<group>"; };
+		B98CA5A421CB8F3E00D7F082 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		B98CA5A821CB9EE900D7F082 /* ImageClassifier2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ImageClassifier2.mlmodel; sourceTree = "<group>"; };
 		B9E1F1C721B42698009226B7 /* ImageClassifier1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ImageClassifier1.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,7 +82,7 @@
 				11063F631EC0EECC0033EE6D /* ImageClassificationViewController.swift */,
 				11063F731EC0F5270033EE6D /* CGImagePropertyOrientation+UIImageOrientation.swift */,
 				B9E1F1C721B42698009226B7 /* ImageClassifier1.mlmodel */,
-				B982282821B543F0004F5CF5 /* ImageClassifier2.mlmodel */,
+				B98CA5A821CB9EE900D7F082 /* ImageClassifier2.mlmodel */,
 				B982282621B4C54B004F5CF5 /* Inceptionv3.mlmodel */,
 				11063F651EC0EECC0033EE6D /* Main.storyboard */,
 				C82A1C951F1809F5005996F6 /* Supporting Files */,
@@ -97,6 +109,12 @@
 		C82A1C951F1809F5005996F6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B98CA59A21CB8A7700D7F082 /* FocusSquare.swift */,
+				B98CA59B21CB8A7700D7F082 /* FocusSquareSegment.swift */,
+				B98CA59E21CB8D5000D7F082 /* VirtualObject.swift */,
+				B98CA59F21CB8D5000D7F082 /* VirtualObjectLoader.swift */,
+				B98CA5A221CB8E1000D7F082 /* VirtualObjectARView.swift */,
+				B98CA5A421CB8F3E00D7F082 /* Utilities.swift */,
 				11063F681EC0EECC0033EE6D /* Assets.xcassets */,
 				11063F6D1EC0EECC0033EE6D /* Info.plist */,
 				113695D61EC1151400CA6C43 /* LaunchScreen.storyboard */,
@@ -176,11 +194,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B982282721B4C54B004F5CF5 /* Inceptionv3.mlmodel in Sources */,
-				B982282921B543F0004F5CF5 /* ImageClassifier2.mlmodel in Sources */,
+				B98CA59C21CB8A7700D7F082 /* FocusSquare.swift in Sources */,
+				B98CA5A521CB8F3E00D7F082 /* Utilities.swift in Sources */,
+				B98CA5A321CB8E1000D7F082 /* VirtualObjectARView.swift in Sources */,
+				B98CA5A921CB9EE900D7F082 /* ImageClassifier2.mlmodel in Sources */,
 				11063F741EC0F5270033EE6D /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */,
 				11063F641EC0EECC0033EE6D /* ImageClassificationViewController.swift in Sources */,
+				B98CA5A021CB8D5000D7F082 /* VirtualObject.swift in Sources */,
 				11063F621EC0EECC0033EE6D /* AppDelegate.swift in Sources */,
 				B9E1F1C821B42698009226B7 /* ImageClassifier1.mlmodel in Sources */,
+				B98CA59D21CB8A7700D7F082 /* FocusSquareSegment.swift in Sources */,
+				B98CA5A121CB8D5000D7F082 /* VirtualObjectLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,11 +348,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COREML_CODEGEN_LANGUAGE = Swift;
-				DEVELOPMENT_TEAM = S457C4ZX6Z;
+				DEVELOPMENT_TEAM = 6QJ3847B92;
 				INFOPLIST_FILE = "Vision+ML Example/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.subham.Hackathon.Mku;
+				PRODUCT_BUNDLE_IDENTIFIER = com.subham.Hackathon.DLHACK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -342,11 +366,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COREML_CODEGEN_LANGUAGE = Swift;
-				DEVELOPMENT_TEAM = S457C4ZX6Z;
+				DEVELOPMENT_TEAM = 6QJ3847B92;
 				INFOPLIST_FILE = "Vision+ML Example/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.subham.Hackathon.Mku;
+				PRODUCT_BUNDLE_IDENTIFIER = com.subham.Hackathon.DLHACK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
